@@ -2,6 +2,7 @@ var inventory = []
 var boatSections = []
 var quickReferences = []
 
+
 function onLoad() {
     load_inventory();
 }
@@ -29,4 +30,12 @@ function dataLoad_onComplete() {
     console.log(inventory);
     console.log(boatSections);
     console.log(quickReferences);
+
+    var SimpleListModel = function(items) {
+        this.items = ko.observableArray(items);
+    };
+     
+    ko.applyBindings(new SimpleListModel(inventory));
+
 }
+

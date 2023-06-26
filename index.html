@@ -1,34 +1,61 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="style.css" />
-<script type='text/javascript' src='./js/knockout-3.5.1.js'></script>
-<script type='text/javascript' src='./js/index.js'></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="style.css" />
+  <script type='text/javascript' src='./js/knockout-3.5.1.js'></script>
+  <script type='text/javascript' src='./js/index.js'></script>
+
+  <script>
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+    }
+
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+    }
+  </script>
+
+
 </head>
 
 <body onload="onLoad()">
 
-<div id="mySidenav" class="sidenav">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a href="#">About</a>
-  <a href="#">Services</a>
-  <a href="#">Clients</a>
-  <a href="#">Contact</a>
-</div>
+  <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="#">About</a>
+    <a href="#">Services</a>
+    <a href="#">Clients</a>
+    <a href="#">Contact</a>
+  </div>
 
+  <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; inventory management</span>
 
-<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; inventory management</span>
+  <div id="content" class="content">
+    <table width="100%">
+      <thead >
+        <td>
+          <label>Box</label>
+        </td>
+        <td>
+          <label>Availability</label>
+        </td>
+      </tbody>
 
-<script>
-function openNav() {
-  document.getElementById("mySidenav").style.width = "250px";
-}
+      <tbody data-bind="foreach: items">
+        <tr>
+          <td>
+            <label data-bind="text:Box">col 1</label>
+          </td>
+          <td>
+            <label data-bind="text:Availability">col 2</label>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-function closeNav() {
-  document.getElementById("mySidenav").style.width = "0";
-}
-</script>
-   
 </body>
-</html> 
+
+</html>

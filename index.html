@@ -14,8 +14,6 @@
     <a href="#settings">Settings</a>
   </div>
   
-
-
   <div id="content" class="content">
     <div class="search-container">
       <form action="/action_page.php">
@@ -27,7 +25,7 @@
     <div class="filter-container">
       <form action="/action_page.php">
         <label for="cars">Filter:</label>
-        <select name="filter" id="filter" data-bind="options:items">
+        <select name="filter" id="filter" data-bind="options:boatSections">
         </select>
         <input type="submit" value="Submit">
       </form>
@@ -49,7 +47,7 @@
         </td>
       </tbody>
 
-      <tbody data-bind="foreach: items">
+      <tbody data-bind="foreach: inventory">
         <tr>
           <td>
             <label data-bind="text:Box">col 1</label>

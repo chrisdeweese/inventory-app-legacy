@@ -13,7 +13,45 @@
     <a href="#manage">Manage Items</a>
     <a href="#settings">Settings</a>
   </div>
+
+  <!-- <div class="loader"></div> -->
+
+  <div id="id01" class="modal">
+    <form class="modal-content animate" action="/action_page.php" method="post">
+      <div class="imgcontainer">
+        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+      </div>
+      <div class="container">
+        <label for="componentName"><b>Component Name</b></label>
+        <input type="text" placeholder="Enter component name..." name="componentName" required>
+        <label for="shelf"><b>Shelf</b></label>
+        <input type="number" placeholder="Enter shelf #..." name="shelf" required>
+        <label for="box"><b>Box</b></label>
+        <input type="number" placeholder="Enter box #..." name="box" required>
+        <label for="serialNumber"><b>Serial Number</b></label>
+        <input type="number" placeholder="Enter serial number..." name="serialNumber" required>
+        <label for="quantity"><b>Quantity</b></label>
+        <input type="number" placeholder="Enter item quantity..." name="quantity" required>
+        <button type="submit">Finish</button>
+      </div>
+      <div class="container" style="background-color:#f1f1f1">
+        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+      </div>
+    </form>
+  </div>
   
+  <script>
+    // Get the modal
+    var modal = document.getElementById('id01');
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    </script>
+
   <div id="content" class="content">
     <div class="search-container">
       <input type="text" placeholder="Search.." name="search">
@@ -24,7 +62,7 @@
       <label>Filter:</label>
       <select name="filter" id="filter" data-bind="options:boatSections">
       </select>
-      <input type="submit" value="Update">
+      <button type="submit">Update</button>
     </div>
     <br>
     <div class="sort-container">
@@ -33,39 +71,19 @@
         <option value="sortByBoatSection">Boat Sections</option>
         <option value="sortByQuickReference">Quick Reference</option>
       </select>
-      <input type="submit" value="Update">
+      <button type="submit">Update</button>
     </div>
     <br>
     <div class="add-product-container">
-      <button title="Add Product">+ Add Product</button>
+      <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">+ Add Product</button>
     </div>
     <br>
     <h1>Coff-Elec</h1>
-    <div class="scrolling-wrapper">
+    <div class="scrolling-wrapper" data-bind="foreach: inventory"> 
       <div class="card">
         <img src="https://placehold.co/600x400.png" alt="Cinque Terre" width="150" height="150"/>
-        <h3>Item Title</h3>
-        <p>Lorem item description goes here.</p>
-      </div>
-      <div class="card">
-        <img src="https://placehold.co/600x400.png" alt="Cinque Terre" width="150" height="150"/>
-        <h3>Item Title</h3>
-        <p>Lorem item description goes here.</p>
-      </div>
-      <div class="card">
-        <img src="https://placehold.co/600x400.png" alt="Cinque Terre" width="150" height="150"/>
-        <h3>Item Title</h3>
-        <p>Lorem item description goes here.</p>
-      </div>
-      <div class="card">
-        <img src="https://placehold.co/600x400.png" alt="Cinque Terre" width="150" height="150"/>
-        <h3>Item Title</h3>
-        <p>Lorem item description goes here.</p>
-      </div>
-      <div class="card">
-        <img src="https://placehold.co/600x400.png" alt="Cinque Terre" width="150" height="150"/>
-        <h3>Item Title</h3>
-        <p>Lorem item description goes here.</p>
+        <h3 data-bind="text:recordID"></h3>
+        <p data-bind="text:Quantity">Quantity</p>
       </div>
     </div>
     <h1>Cofferdam</h1>

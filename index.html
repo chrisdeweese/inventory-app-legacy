@@ -16,28 +16,115 @@
   
   <div id="content" class="content">
     <div class="search-container">
-      <form action="/action_page.php">
-        <input type="text" placeholder="Search.." name="search">
-        <button type="submit">Submit</button>
-      </form>
+      <input type="text" placeholder="Search.." name="search">
+      <button type="submit">Search</button>
     </div>
     <br>
     <div class="filter-container">
-      <form action="/action_page.php">
-        <label for="cars">Filter:</label>
-        <select name="filter" id="filter" data-bind="options:boatSections">
-        </select>
-        <input type="submit" value="Submit">
-      </form>
+      <label>Filter:</label>
+      <select name="filter" id="filter" data-bind="options:boatSections">
+      </select>
+      <input type="submit" value="Update">
     </div>
     <br>
-    <div class="scroll-container">
-      <img src="https://placehold.co/600x400.png" alt="Cinque Terre" width="600" height="400">
-      <img src="https://placehold.co/600x400.png" alt="Forest" width="600" height="400">
-      <img src="https://placehold.co/600x400.png" alt="Northern Lights" width="600" height="400">
-      <img src="https://placehold.co/600x400.png" alt="Mountains" width="600" height="400">
+    <div class="sort-container">
+      <label>Sort:</label>
+      <select name="sort" id="sort">
+        <option value="sortByBoatSection">Boat Sections</option>
+        <option value="sortByQuickReference">Quick Reference</option>
+      </select>
+      <input type="submit" value="Update">
     </div>
-    <table width="100%">
+    <br>
+    <div class="add-product-container">
+      <button title="Add Product">+ Add Product</button>
+    </div>
+    <br>
+    <h1>Coff-Elec</h1>
+    <div class="scrolling-wrapper">
+      <div class="card">
+        <img src="https://placehold.co/600x400.png" alt="Cinque Terre" width="150" height="150"/>
+        <h3>Item Title</h3>
+        <p>Lorem item description goes here.</p>
+      </div>
+      <div class="card">
+        <img src="https://placehold.co/600x400.png" alt="Cinque Terre" width="150" height="150"/>
+        <h3>Item Title</h3>
+        <p>Lorem item description goes here.</p>
+      </div>
+      <div class="card">
+        <img src="https://placehold.co/600x400.png" alt="Cinque Terre" width="150" height="150"/>
+        <h3>Item Title</h3>
+        <p>Lorem item description goes here.</p>
+      </div>
+      <div class="card">
+        <img src="https://placehold.co/600x400.png" alt="Cinque Terre" width="150" height="150"/>
+        <h3>Item Title</h3>
+        <p>Lorem item description goes here.</p>
+      </div>
+      <div class="card">
+        <img src="https://placehold.co/600x400.png" alt="Cinque Terre" width="150" height="150"/>
+        <h3>Item Title</h3>
+        <p>Lorem item description goes here.</p>
+      </div>
+    </div>
+    <h1>Cofferdam</h1>
+    <div class="scrolling-wrapper">
+      <div class="card">
+        <img src="https://placehold.co/600x400.png" alt="Cinque Terre" width="150" height="150"/>
+        <h3>Item Title</h3>
+        <p>Lorem item description goes here.</p>
+      </div>
+      <div class="card">
+        <img src="https://placehold.co/600x400.png" alt="Cinque Terre" width="150" height="150"/>
+        <h3>Item Title</h3>
+        <p>Lorem item description goes here.</p>
+      </div>
+      <div class="card">
+        <img src="https://placehold.co/600x400.png" alt="Cinque Terre" width="150" height="150"/>
+        <h3>Item Title</h3>
+        <p>Lorem item description goes here.</p>
+      </div>
+      <div class="card">
+        <img src="https://placehold.co/600x400.png" alt="Cinque Terre" width="150" height="150"/>
+        <h3>Item Title</h3>
+        <p>Lorem item description goes here.</p>
+      </div>
+      <div class="card">
+        <img src="https://placehold.co/600x400.png" alt="Cinque Terre" width="150" height="150"/>
+        <h3>Item Title</h3>
+        <p>Lorem item description goes here.</p>
+      </div>
+    </div>
+    <h1>Cofferdam / Intrepid</h1>
+    <div class="scrolling-wrapper">
+      <div class="card">
+        <img src="https://placehold.co/600x400.png" alt="Cinque Terre" width="150" height="150"/>
+        <h3>Item Title</h3>
+        <p>Lorem item description goes here.</p>
+      </div>
+      <div class="card">
+        <img src="https://placehold.co/600x400.png" alt="Cinque Terre" width="150" height="150"/>
+        <h3>Item Title</h3>
+        <p>Lorem item description goes here.</p>
+      </div>
+      <div class="card">
+        <img src="https://placehold.co/600x400.png" alt="Cinque Terre" width="150" height="150"/>
+        <h3>Item Title</h3>
+        <p>Lorem item description goes here.</p>
+      </div>
+      <div class="card">
+        <img src="https://placehold.co/600x400.png" alt="Cinque Terre" width="150" height="150"/>
+        <h3>Item Title</h3>
+        <p>Lorem item description goes here.</p>
+      </div>
+      <div class="card">
+        <img src="https://placehold.co/600x400.png" alt="Cinque Terre" width="150" height="150"/>
+        <h3>Item Title</h3>
+        <p>Lorem item description goes here.</p>
+      </div>
+    </div>
+    <!-- <table width="100%">
       <thead >
         <td>
           <label>Box</label>
@@ -57,7 +144,7 @@
           </td>
         </tr>
       </tbody>
-    </table>
+    </table> -->
   </div>
 
 <script>

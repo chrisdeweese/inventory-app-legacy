@@ -35,7 +35,7 @@ function dataLoad_onComplete() {
     // create the inventoryByQuickRef array
     for (var index in inventory) {
         var dict = inventory[index];
-        var qr = dict["Quick Reference"].trim().toUpperCase();
+        var qr = dict["QuickReference"].trim().toUpperCase();
 
         var filterBy = [qr];
         var res = inventoryByQuickRef.filter(({groupKey}) => filterBy.includes(groupKey));
@@ -58,10 +58,20 @@ function dataLoad_onComplete() {
     console.log(inventoryByQuickRef);
 
 
+      // Update blank section to unknown section
+      for (var index in inventory) {
+        var dict = inventory[index];
+        var boatSection = dict["BoatSection"].trim().toUpperCase();
+        if (boatSection == "") {
+            inventory[index]["BoatSection"] = "🔎 Unassigned Section"
+        }
+    }
+
+
      // create the inventoryByBoatSection array
      for (var index in inventory) {
         var dict = inventory[index];
-        var boatSection = dict["Boat Section"].trim().toUpperCase();
+        var boatSection = dict["BoatSection"].trim().toUpperCase();
 
         var filterBy = [boatSection];
         var res = inventoryByBoatSection.filter(({groupKey}) => filterBy.includes(groupKey));
@@ -82,6 +92,7 @@ function dataLoad_onComplete() {
         return 0 //default return value (no sorting)
     })
 
+    console.log('inventoryByBoatSection ->')
     console.log(inventoryByBoatSection);
 
 

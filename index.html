@@ -60,9 +60,7 @@
     <br>
     <div class="filter-container">
       <label>Filter:</label>
-      <select name="filter" id="filter" data-bind="options:boatSections">
-      </select>
-      <button type="submit">Update</button>
+      <select name="filter" id="filter" data-bind="options:boatSections, value:selectedBoatSectionFilter"></select>
     </div>
     <br>
     <div class="sort-container">
@@ -78,68 +76,15 @@
       <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">+ Add Product</button>
     </div>
     <br>
-    <h1>Coff-Elec</h1>
-    <div class="scrolling-wrapper" data-bind="foreach: inventory"> 
-      <div class="card">
-        <img src="https://placehold.co/600x400.png" alt="Cinque Terre" width="150" height="150"/>
-        <h3 data-bind="text:RecordID"></h3>
-        <p data-bind="text:Quantity">Quantity</p>
-      </div>
-    </div>
-    <h1>Cofferdam</h1>
-    <div class="scrolling-wrapper">
-      <div class="card">
-        <img src="https://placehold.co/600x400.png" alt="Cinque Terre" width="150" height="150"/>
-        <h3>Item Title</h3>
-        <p>Lorem item description goes here.</p>
-      </div>
-      <div class="card">
-        <img src="https://placehold.co/600x400.png" alt="Cinque Terre" width="150" height="150"/>
-        <h3>Item Title</h3>
-        <p>Lorem item description goes here.</p>
-      </div>
-      <div class="card">
-        <img src="https://placehold.co/600x400.png" alt="Cinque Terre" width="150" height="150"/>
-        <h3>Item Title</h3>
-        <p>Lorem item description goes here.</p>
-      </div>
-      <div class="card">
-        <img src="https://placehold.co/600x400.png" alt="Cinque Terre" width="150" height="150"/>
-        <h3>Item Title</h3>
-        <p>Lorem item description goes here.</p>
-      </div>
-      <div class="card">
-        <img src="https://placehold.co/600x400.png" alt="Cinque Terre" width="150" height="150"/>
-        <h3>Item Title</h3>
-        <p>Lorem item description goes here.</p>
-      </div>
-    </div>
-    <h1>Cofferdam / Intrepid</h1>
-    <div class="scrolling-wrapper">
-      <div class="card">
-        <img src="https://placehold.co/600x400.png" alt="Cinque Terre" width="150" height="150"/>
-        <h3>Item Title</h3>
-        <p>Lorem item description goes here.</p>
-      </div>
-      <div class="card">
-        <img src="https://placehold.co/600x400.png" alt="Cinque Terre" width="150" height="150"/>
-        <h3>Item Title</h3>
-        <p>Lorem item description goes here.</p>
-      </div>
-      <div class="card">
-        <img src="https://placehold.co/600x400.png" alt="Cinque Terre" width="150" height="150"/>
-        <h3>Item Title</h3>
-        <p>Lorem item description goes here.</p>
-      </div>
-      <div class="card">
-        <img src="https://placehold.co/600x400.png" alt="Cinque Terre" width="150" height="150"/>
-        <h3>Item Title</h3>
-        <p>Lorem item description goes here.</p>
-      </div>
-      <div class="card">
-        <img src="https://placehold.co/600x400.png" alt="Cinque Terre" width="150" height="150"/>
-        <h3>Item Title</h3>
-        <p>Lorem item description goes here.</p>
+    
+    <div data-bind="foreach: filteredBoatSections">
+      <h1 data-bind="text:groupKey">Coff-Elec</h1>
+      <div class="scrolling-wrapper" data-bind="foreach: items"> 
+        <div class="card">
+          <img src="https://placehold.co/600x400.png" alt="Cinque Terre" width="150" height="150"/>
+          <h3 data-bind="text:ComponentName"></h3>
+          <!-- <p data-bind="text:Quantity">Quantity</p> -->
+        </div>
       </div>
     </div>
     <!-- <table width="100%">

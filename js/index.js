@@ -95,13 +95,24 @@ function dataLoad_onComplete() {
     console.log('inventoryByBoatSection ->')
     console.log(inventoryByBoatSection);
 
+    // create view model
+    var SimpleListModel = function(items, inventoryByBoatSection) {
+        this.boatSections = ko.observableArray(items);
+        this.selectedBoatSectionFilter = ko.observable("");
 
+        this.selectedBoatSectionFilter.subscribe(function () {
+            console.log('updated!', this.selectedBoatSectionFilter());
+        }, this);
 
-    var SimpleListModel = function(items) {
-        this.items = ko.observableArray(items);
+        this.filteredBoatSections = ko.computed(function() {
+            return ko.utils.arrayFilter(this.inventoryByBoatSection, function(item) {
+                return item.groupKey == this.selectedBoatSectionFilter();
+            });
+        });
+
+        this.inventoryByBoatSection = ko.observableArray(inventoryByBoatSection);
     };
      
-    ko.applyBindings(new SimpleListModel(boatSections));
-
+    ko.applyBindings(new SimpleListModel(boatSections, inventoryByBoatSection));
 }
 

@@ -96,21 +96,41 @@ function dataLoad_onComplete() {
     console.log(inventoryByBoatSection);
 
     // create view model
-    var SimpleListModel = function(items, inventoryByBoatSection) {
-        this.boatSections = ko.observableArray(items);
-        this.selectedBoatSectionFilter = ko.observable("");
+    var SimpleListModel = function(boatSections, inventoryByBoatSection) {
+        var self = this;
 
-        this.selectedBoatSectionFilter.subscribe(function () {
-            console.log('updated!', this.selectedBoatSectionFilter());
+        this.boatSectionsList = ko.observableArray(boatSections);
+        this.boatSectionsList.unshift('ALL SECTIONS');
+
+        this.boatSectionsList
+        this.inventoryItems = ko.observableArray();
+        for (let index = 0; index < inventoryByBoatSection.length; ++index) {
+            var record = inventoryByBoatSection[index];
+            record.matchesFilter = ko.observable(true);
+            this.inventoryItems.push(record);
+        }
+
+        this.selectedBoatSection = ko.observable('ALL SECTIONS');
+        this.selectedBoatSection.subscribe(function () {
+            var selectedBoatSection = this.selectedBoatSection().toUpperCase();
+            var items = this.inventoryItems();
+            for (let index = 0; index < items.length; ++index) {
+                const groupKey = items[index].groupKey.toUpperCase();
+                if (selectedBoatSection == 'ALL SECTIONS'){
+                    items[index].matchesFilter(true);
+                }else {
+                    items[index].matchesFilter(groupKey == selectedBoatSection);
+                }
+            } 
+            console.log('updated!', selectedBoatSection);
         }, this);
 
-        this.filteredBoatSections = ko.computed(function() {
-            return ko.utils.arrayFilter(this.inventoryByBoatSection, function(item) {
-                return item.groupKey == this.selectedBoatSectionFilter();
+        self.filterInventory = ko.computed(function() {
+            return ko.utils.arrayFilter(self.inventoryItems(), function(item) {
+                return item.matchesFilter() == true;
             });
         });
 
-        this.inventoryByBoatSection = ko.observableArray(inventoryByBoatSection);
     };
      
     ko.applyBindings(new SimpleListModel(boatSections, inventoryByBoatSection));

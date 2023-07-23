@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="style.css" />
+  <script type='text/javascript' src='./js/knockout-3.5.1.js'></script>
+  <script type='text/javascript' src='./js/index.js'></script>
+</head>
+<body onload="onLoad()">
+  <div id="mySidenav" class="sidebar">
+    <a class="active" href="index.html">< Back</a>
+  </div>
+
+  <div id="content" class="content">
+    <div class="edit-item-container">
+      <button onclick="document.getElementById('edit').style.display='block'" style="width:auto;">Edit Item</button>
+    </div>
+    <div id="details">
+      <h1>ComponentName (string)</h1>
+      <h3>Availability (bool)</h3>
+      <h3>BoatSection (string)</h3>
+      <h3>Shelf (double)</h3>
+      <h3>Box (double)</h3>
+      <h3>SerialNumber (double)</h3>
+      <h3>PurchasePrice (string)</h3>
+      <h3>AproxPriceValue (string)</h3>
+      <h3>Quantity (double)</h3>
+      <h3>OriginalQty (double)</h3>
+      <h3>FunctionOrUse (string)</h3>
+      <h3>ShelfComment (string)</h3>
+      <h3>QuickReference (string)</h3>
+      <h3>PartNumber (string)</h3>
+      <h3>Spacer (string)</h3>
+      <h3>Photos1 (string)</h3>
+      <h3>Photos2 (string)</h3>
+      <h3>SN (double)</h3>
+      <h3>RecordID (string)</h3>
+    </div>
+    <div id="edit">
+      <input type="text" placeholder="Component name.." name="ComponentName">
+      <input type="text" placeholder="Availability.." name="Availability">
+      <input type="text" placeholder="Boat section.." name="BoatSection">
+      <input type="text" placeholder="Shelf.." name="Shelf">
+      <input type="text" placeholder="Box.." name="Box">
+      <input type="text" placeholder="Serial number.." name="SerialNumber">
+      <input type="text" placeholder="Purchase price.." name="PurchasePrice">
+      <input type="text" placeholder="Aprox price value.." name="AproxPriceValue">
+      <input type="text" placeholder="Quantity.." name="Quantity">
+      <input type="text" placeholder="Original qty.." name="OriginalQty">
+      <input type="text" placeholder="Function or use.." name="FunctionOrUse">
+      <input type="text" placeholder="Shelf comment.." name="ShelfComment">
+      <input type="text" placeholder="Quick reference.." name="QuickReference">
+      <input type="text" placeholder="Part number.." name="PartNumber">
+      <input type="text" placeholder="Space.." name="Spacer">
+      <input type="text" placeholder="Photos 1.." name="Photos1">
+      <input type="text" placeholder="Photos 2.." name="Photos2">
+      <input type="text" placeholder="SN.." name="SN">
+      <button type="submit">Save Changes</button> 
+    </div>
+  </div>
+</body>
+</html>

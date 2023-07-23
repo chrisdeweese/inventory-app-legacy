@@ -69,7 +69,6 @@
         <option value="sortByBoatSection">Boat Sections</option>
         <option value="sortByQuickReference">Quick Reference</option>
       </select>
-      <button type="submit">Update</button>
     </div>
     <br>
     <div class="add-product-container">
@@ -78,14 +77,16 @@
     <br>
     
     <div data-bind="foreach: filterInventory">
-      <h1 data-bind="text:groupKey">Coff-Elec</h1>
-      <div class="scrolling-wrapper" data-bind="foreach: items"> 
-        <div class="card">
-          <img src="https://placehold.co/600x400.png" alt="Cinque Terre" width="150" height="150"/>
-          <h3 data-bind="text:ComponentName"></h3>
-          <!-- <p data-bind="text:Quantity">Quantity</p> -->
+      <h1 data-bind="text:groupKey">Group Title</h1>
+      <a href="item-details.html">
+        <div class="scrolling-wrapper" data-bind="foreach: items"> 
+          <div class="card">
+            <img src="https://placehold.co/600x400.png" alt="Cinque Terre" width="150" height="150"/>
+            <h3 data-bind="text:ComponentName"></h3>
+            <!-- <p data-bind="text:Quantity">Quantity</p> -->
+          </div>
         </div>
-      </div>
+      </a>
     </div>
   </div>
 

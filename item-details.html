@@ -4,7 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="style.css" />
   <script type='text/javascript' src='./js/knockout-3.5.1.js'></script>
-  <script type='text/javascript' src='./js/index.js'></script>
+  <script type='text/javascript' src='./js/item-detail.js'></script>
 </head>
 <body onload="onLoad()">
   <div id="mySidenav" class="sidebar">
@@ -34,12 +34,12 @@
       <h3>Photos1 (string)</h3>
       <h3>Photos2 (string)</h3>
       <h3>SN (double)</h3>
-      <h3>RecordID (string)</h3>
+  
     </div>
     <div id="edit">
-      <input type="text" placeholder="Component name.." name="ComponentName">
-      <input type="text" placeholder="Availability.." name="Availability">
-      <input type="text" placeholder="Boat section.." name="BoatSection">
+      <input type="text"  data-bind="value: inventoryItem.ComponentName" placeholder="Component name.." name="ComponentName">
+      <input type="text"  data-bind="value: inventoryItem.Availability" placeholder="Availability.." name="Availability">
+      <input type="text"  data-bind="value: inventoryItem.BoatSection" placeholder="Boat section.." name="BoatSection">
       <input type="text" placeholder="Shelf.." name="Shelf">
       <input type="text" placeholder="Box.." name="Box">
       <input type="text" placeholder="Serial number.." name="SerialNumber">
@@ -55,7 +55,8 @@
       <input type="text" placeholder="Photos 1.." name="Photos1">
       <input type="text" placeholder="Photos 2.." name="Photos2">
       <input type="text" placeholder="SN.." name="SN">
-      <button type="submit">Save Changes</button> 
+      
+      <button type="submit" data-bind='click: save'>Save Changes</button> 
     </div>
   </div>
 </body>

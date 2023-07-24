@@ -115,6 +115,90 @@ var SimpleListModel = function (boatSections, inventoryByBoatSection) {
         this.inventoryItems.push(record);
     }
 
+
+    this.searchTerm = ko.observable('');
+    this.searchTerm.subscribe(function () {
+
+        var searchTerm = this.searchTerm().toLowerCase();
+
+        console.log('searchTerm', searchTerm);
+
+        var selectedBoatSection = this.selectedBoatSection().toUpperCase();
+        var items = this.inventoryItems();
+
+        for (let index = 0; index < items.length; ++index) {
+            const groupKey = items[index].groupKey.toUpperCase();
+
+            var matchesSection = false;
+
+            if (selectedBoatSection == 'ALL SECTIONS') {
+                matchesSection = true;
+            } else {
+                matchesSection = groupKey == selectedBoatSection;
+            }
+
+            if (searchTerm.trim().length == 0) {
+                items[index].matchesFilter(matchesSection);
+
+            } else {
+
+                // if matches section then filt on search term
+                if (searchTerm.length > 0) {
+         
+                    var matchesSearchTerm = false;
+                    var item = items[index];
+                    console.log('item', item);
+
+                    var BoatSection = items[index].BoatSection;
+                    var Box = items[index].Box;
+                    var ComponentName = items[index].ComponentName;
+                    var FunctionOrUse = items[index].FunctionOrUse;
+                    var PartNumber = items[index].PartNumber;
+                    var QuickReference = items[index].QuickReference;
+                    var SN = items[index].SN;
+                    var SerialNumber = items[index].SerialNumber;
+                    var Shelf = items[index].Shelf;
+                    var ShelfComment = items[index].ShelfComment;
+                   
+                    console.log('ComponentName', ComponentName);
+
+                    if (BoatSection != null && BoatSection.toLowerCase().includes(searchTerm)){ 
+                        matchesSearchTerm = true;
+
+                    } else if (Box != null && Box.toLowerCase().includes(searchTerm)){ 
+                        matchesSearchTerm = true;
+
+                    } else if (ComponentName != null && ComponentName.toLowerCase().includes(searchTerm)){ 
+                        matchesSearchTerm = true;
+
+                    } else if (FunctionOrUse != null && FunctionOrUse.toLowerCase().includes(searchTerm)){ 
+                        matchesSearchTerm = true;
+                    } else if (PartNumber != null && PartNumber.toLowerCase().includes(searchTerm)){ 
+                        matchesSearchTerm = true;
+                    } else if (QuickReference != null && QuickReference.toLowerCase().includes(searchTerm)){ 
+                        matchesSearchTerm = true;
+                    } else if (SN != null && SN.toLowerCase().includes(searchTerm)){ 
+                        matchesSearchTerm = true;
+                    } else if (SerialNumber != null && SerialNumber.toLowerCase().includes(searchTerm)){ 
+                        matchesSearchTerm = true;
+                    } else if (Shelf != null && Shelf.toLowerCase().includes(searchTerm)){ 
+                        matchesSearchTerm = true;
+                    } else if (ShelfComment != null && ShelfComment.toLowerCase().includes(searchTerm)){ 
+                        matchesSearchTerm = true;
+                    }
+
+                    items[index].matchesFilter(matchesSearchTerm);
+               
+                }
+
+            }
+
+        }
+
+
+    }, this);
+
+
     this.selectedBoatSection = ko.observable('ALL SECTIONS');
     this.selectedBoatSection.subscribe(function () {
         var selectedBoatSection = this.selectedBoatSection().toUpperCase();
@@ -127,7 +211,6 @@ var SimpleListModel = function (boatSections, inventoryByBoatSection) {
                 items[index].matchesFilter(groupKey == selectedBoatSection);
             }
         }
-        console.log('updated!', selectedBoatSection);
     }, this);
 
     self.filterInventory = ko.computed(function () {

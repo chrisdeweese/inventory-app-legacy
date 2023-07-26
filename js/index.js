@@ -233,7 +233,6 @@ var SimpleListModel = function (boatSections, inventoryByBoatSection) {
     });
 
 
-
     self.onInventoryRowClick = function (inventoryItem) {
         console.log('inventoryItem', inventoryItem);
         var thisItem = ko.toJSON(inventoryItem);

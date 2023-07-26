@@ -5,6 +5,7 @@ var inventoryByQuickRef = []
 var inventoryByBoatSection = []
 
 function onLoad() {
+    console.log('onLoad')
     load_inventory();
 }
 
@@ -55,7 +56,6 @@ function dataLoad_onComplete() {
             return 1
         return 0 //default return value (no sorting)
     })
-    console.log('inventoryByQuickRef', inventoryByQuickRef);
 
 
     // Update blank section to unknown section
@@ -95,8 +95,6 @@ function dataLoad_onComplete() {
     console.log('inventoryByBoatSection ->')
     console.log(inventoryByBoatSection);
 
-
-
     ko.applyBindings(new SimpleListModel(boatSections, inventoryByBoatSection));
 }
 
@@ -112,6 +110,13 @@ var SimpleListModel = function (boatSections, inventoryByBoatSection) {
     for (let index = 0; index < inventoryByBoatSection.length; ++index) {
         var record = inventoryByBoatSection[index];
         record.matchesFilter = ko.observable(true);
+
+        var items = record.items;
+        for (let itemIndex = 0; itemIndex < items.length; ++itemIndex) {
+            var item = items[itemIndex];
+            item.matchesFilter = ko.observable(true);
+        }
+
         this.inventoryItems.push(record);
     }
 
@@ -119,77 +124,71 @@ var SimpleListModel = function (boatSections, inventoryByBoatSection) {
     this.searchTerm = ko.observable('');
     this.searchTerm.subscribe(function () {
 
-        var searchTerm = this.searchTerm().toLowerCase();
-
+        var searchTerm = this.searchTerm().trim().toLowerCase();
+        var shouldSearch = searchTerm.trim().length > 0;
         console.log('searchTerm', searchTerm);
+        var groups = this.inventoryItems();
 
-        var selectedBoatSection = this.selectedBoatSection().toUpperCase();
-        var items = this.inventoryItems();
+        localStorage.setItem("searchTerm", searchTerm);
 
-        for (let index = 0; index < items.length; ++index) {
-            const groupKey = items[index].groupKey.toUpperCase();
+        // loop through groups
+        for (let groupIndex = 0; groupIndex < groups.length; ++groupIndex) {
+            const group = groups[groupIndex];
+            const groupItems = group.items;
 
-            var matchesSection = false;
+            // loop through group items
+            for (let index = 0; index < groupItems.length; ++index) {
 
-            if (selectedBoatSection == 'ALL SECTIONS') {
-                matchesSection = true;
-            } else {
-                matchesSection = groupKey == selectedBoatSection;
-            }
+                const item = groupItems[index];
+                if (!shouldSearch) {
+                    item.matchesFilter(true);
+                    continue;
+                }
 
-            if (searchTerm.trim().length == 0) {
-                items[index].matchesFilter(matchesSection);
+                var matchesSearchTerm = false;
+                var BoatSection = item.BoatSection;
+                var Box = item.Box;
+                var ComponentName = item.ComponentName;
+                var FunctionOrUse = item.FunctionOrUse;
+                var PartNumber = item.PartNumber;
+                var QuickReference = item.QuickReference;
+                var SN = item.SN;
+                var SerialNumber = item.SerialNumber;
+                var Shelf = item.Shelf;
+                var ShelfComment = item.ShelfComment;
 
-            } else {
+                var testFields = [];
+                testFields.push(BoatSection);
+                testFields.push(Box);
+                testFields.push(ComponentName);
+                testFields.push(FunctionOrUse);
+                testFields.push(PartNumber);
+                testFields.push(QuickReference);
+                testFields.push(SN);
+                testFields.push(SerialNumber);
+                testFields.push(Shelf);
+                testFields.push(ShelfComment);
 
-                // if matches section then filt on search term
-                if (searchTerm.length > 0) {
-         
-                    var matchesSearchTerm = false;
-                    var item = items[index];
-                    console.log('item', item);
+                for (let fieldsIndex = 0; fieldsIndex < testFields.length; ++fieldsIndex) {
+                    var field = testFields[fieldsIndex];
+                    var fieldType = typeof field;
 
-                    var BoatSection = items[index].BoatSection;
-                    var Box = items[index].Box;
-                    var ComponentName = items[index].ComponentName;
-                    var FunctionOrUse = items[index].FunctionOrUse;
-                    var PartNumber = items[index].PartNumber;
-                    var QuickReference = items[index].QuickReference;
-                    var SN = items[index].SN;
-                    var SerialNumber = items[index].SerialNumber;
-                    var Shelf = items[index].Shelf;
-                    var ShelfComment = items[index].ShelfComment;
-                   
-                    console.log('ComponentName', ComponentName);
+                    if (fieldType == 'string') {
+                        field = field.toLowerCase();
 
-                    if (BoatSection != null && BoatSection.toLowerCase().includes(searchTerm)){ 
-                        matchesSearchTerm = true;
+                    } else if (fieldType == 'number') {
+                        field = field + '';
 
-                    } else if (Box != null && Box.toLowerCase().includes(searchTerm)){ 
-                        matchesSearchTerm = true;
-
-                    } else if (ComponentName != null && ComponentName.toLowerCase().includes(searchTerm)){ 
-                        matchesSearchTerm = true;
-
-                    } else if (FunctionOrUse != null && FunctionOrUse.toLowerCase().includes(searchTerm)){ 
-                        matchesSearchTerm = true;
-                    } else if (PartNumber != null && PartNumber.toLowerCase().includes(searchTerm)){ 
-                        matchesSearchTerm = true;
-                    } else if (QuickReference != null && QuickReference.toLowerCase().includes(searchTerm)){ 
-                        matchesSearchTerm = true;
-                    } else if (SN != null && SN.toLowerCase().includes(searchTerm)){ 
-                        matchesSearchTerm = true;
-                    } else if (SerialNumber != null && SerialNumber.toLowerCase().includes(searchTerm)){ 
-                        matchesSearchTerm = true;
-                    } else if (Shelf != null && Shelf.toLowerCase().includes(searchTerm)){ 
-                        matchesSearchTerm = true;
-                    } else if (ShelfComment != null && ShelfComment.toLowerCase().includes(searchTerm)){ 
-                        matchesSearchTerm = true;
                     }
 
-                    items[index].matchesFilter(matchesSearchTerm);
-               
+                    if (field.includes(searchTerm)) {
+                        matchesSearchTerm = true;
+                        break;
+                    }
+
                 }
+
+                item.matchesFilter(matchesSearchTerm);
 
             }
 
@@ -197,6 +196,10 @@ var SimpleListModel = function (boatSections, inventoryByBoatSection) {
 
 
     }, this);
+
+    var storedSearchTerm = localStorage.getItem("searchTerm");
+    this.searchTerm(storedSearchTerm);
+
 
 
     this.selectedBoatSection = ko.observable('ALL SECTIONS');
@@ -213,10 +216,20 @@ var SimpleListModel = function (boatSections, inventoryByBoatSection) {
         }
     }, this);
 
-    self.filterInventory = ko.computed(function () {
+
+    self.filterdGroups = ko.computed(function () {
+
         return ko.utils.arrayFilter(self.inventoryItems(), function (item) {
-            return item.matchesFilter() == true;
+
+            var test1 = item.matchesFilter() == true;
+            var childern = ko.utils.arrayFilter(item.items, function (item2) {
+                return item2.matchesFilter() == true;
+            });
+
+            return (test1 && childern.length > 0);
+
         });
+
     });
 
 

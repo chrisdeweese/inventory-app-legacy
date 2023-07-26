@@ -79,10 +79,10 @@
     </div>
     <br>
 
-    <div data-bind="foreach: filterInventory">
+    <div data-bind="foreach: filterdGroups">
       <h1 data-bind="text:groupKey">Group Title</h1>
       <div class="scrolling-wrapper" data-bind="foreach: items">
-        <a data-bind="click: $root.onInventoryRowClick">
+        <a data-bind="click: $root.onInventoryRowClick, visible: matchesFilter">
           <div class="card">
             <img src="https://placehold.co/600x400.png" alt="Cinque Terre" width="150" height="150" />
             <h3 data-bind="text:ComponentName"></h3>

@@ -128,7 +128,7 @@ var SimpleListModel = function (boatSections, inventoryByBoatSection) {
         if (!searchTerm) {
             searchTerm = "";
         }else {
-            searchTerm = trim().toLowerCase();
+            searchTerm = searchTerm.trim().toLowerCase();
         }
 
         var shouldSearch = searchTerm.length > 0;

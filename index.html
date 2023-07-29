@@ -36,20 +36,30 @@
         margin-bottom: 40px;
         z-index: 900;
       }
+      .scrolling-wrapper {
+        overflow-x: scroll;
+        overflow-y: hidden;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+
+        .card {
+          display: inline-block;
+        }
+      }
       </style>
 
       <!-- Square card -->
-<style>
-  .demo-card-square.mdl-card {
-    width: 320px;
-    height: 320px;
-  }
-  .demo-card-square > .mdl-card__title {
-    color: #fff;
-    background:
-      url('../assets/demos/dog.png') bottom right 15% no-repeat #46B6AC;
-  }
-  </style>
+      <style>
+      .demo-card-square.mdl-card {
+        width: 320px;
+        height: 320px;
+      }
+      .demo-card-square > .mdl-card__title {
+        color: #fff;
+        background:
+          url('../assets/demos/dog.png') bottom right 15% no-repeat #46B6AC;
+      }
+      </style>
   </head>
 
   <body onload="onLoad()">
@@ -93,19 +103,20 @@
       <main class="mdl-layout__content mdl-color--grey-100">
         <div class="mdl-grid demo-content" data-bind="foreach: filteredGroups">
           <h3 data-bind="text:groupKey">Group Title</h3>
-
-          <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid" data-bind="foreach: items">
-            <div class="demo-card-square mdl-card mdl-shadow--2dp" data-bind="visible: matchesFilter">
-              <div class="mdl-card__title mdl-card--expand">
-                <h2 class="mdl-card__title-text" data-bind="text:ComponentName">[ComponentName]</h2>
-              </div>
-              <div class="mdl-card__supporting-text">
-                [ITEM_DESCRIPTION]
-              </div>
-              <div class="mdl-card__actions mdl-card--border">
-                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" data-bind="click: $root.onInventoryRowClick">
-                  View Item
-                </a>
+          <div class="scrolling-wrapper mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col" style="padding: 15px;" data-bind="foreach: items">
+            <div class="card">
+              <div class="demo-card-square mdl-card mdl-shadow--2dp" data-bind="visible: matchesFilter">
+                <div class="mdl-card__title mdl-card--expand">
+                  <h2 class="mdl-card__title-text" data-bind="text:ComponentName">[ComponentName]</h2>
+                </div>
+                <div class="mdl-card__supporting-text">
+                  [ITEM_DESCRIPTION]
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                  <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" data-bind="click: $root.onInventoryRowClick">
+                    View Item
+                  </a>
+                </div>
               </div>
             </div>
           </div>

@@ -124,8 +124,14 @@ var SimpleListModel = function (boatSections, inventoryByBoatSection) {
     this.searchTerm = ko.observable('');
     this.searchTerm.subscribe(function () {
 
-        var searchTerm = this.searchTerm().trim().toLowerCase();
-        var shouldSearch = searchTerm.trim().length > 0;
+        var searchTerm = this.searchTerm();
+        if (!searchTerm) {
+            searchTerm = "";
+        }else {
+            searchTerm = trim().toLowerCase();
+        }
+
+        var shouldSearch = searchTerm.length > 0;
         console.log('searchTerm', searchTerm);
         var groups = this.inventoryItems();
 

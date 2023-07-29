@@ -105,7 +105,6 @@ var SimpleListModel = function (boatSections, inventoryByBoatSection) {
     this.boatSectionsList = ko.observableArray(boatSections);
     this.boatSectionsList.unshift('ALL SECTIONS');
 
-    this.boatSectionsList
     this.inventoryItems = ko.observableArray();
     for (let index = 0; index < inventoryByBoatSection.length; ++index) {
         var record = inventoryByBoatSection[index];
@@ -119,6 +118,23 @@ var SimpleListModel = function (boatSections, inventoryByBoatSection) {
 
         this.inventoryItems.push(record);
     }
+
+
+    this.searchFilter = ko.observableArray([]);
+    this.searchFilter.push('Search All Fields');
+    this.searchFilter.push('Box');
+    this.searchFilter.push('Shelf');
+    this.searchFilter.push('Serial Number');
+    this.searchFilter.push('Component Name');
+    this.searchFilter.push('Part Number');
+    this.searchFilter.push('Quick Reference');
+    this.searchFilter.push('Shelf Comment');
+    this.selectedSearchFilter= ko.observable(this.searchFilter()[0]);
+    
+    this.selectedSearchFilter.subscribe(function () {
+        // reapply search
+        this.searchTerm.valueHasMutated()
+    }, this);
 
 
     this.searchTerm = ko.observable('');
@@ -163,17 +179,45 @@ var SimpleListModel = function (boatSections, inventoryByBoatSection) {
                 var Shelf = item.Shelf;
                 var ShelfComment = item.ShelfComment;
 
+                var selectedSearchFilter = this.selectedSearchFilter();
+                var isAllFields =  selectedSearchFilter == this.searchFilter()[0];
+                
+
                 var testFields = [];
-                testFields.push(BoatSection);
-                testFields.push(Box);
-                testFields.push(ComponentName);
-                testFields.push(FunctionOrUse);
-                testFields.push(PartNumber);
-                testFields.push(QuickReference);
-                testFields.push(SN);
-                testFields.push(SerialNumber);
-                testFields.push(Shelf);
-                testFields.push(ShelfComment);
+                if (isAllFields){
+                    testFields.push(BoatSection);
+                    testFields.push(Box);
+                    testFields.push(ComponentName);
+                    testFields.push(FunctionOrUse);
+                    testFields.push(PartNumber);
+                    testFields.push(QuickReference);
+                    testFields.push(SN);
+                    testFields.push(SerialNumber);
+                    testFields.push(Shelf);
+                    testFields.push(ShelfComment);
+                } else if (selectedSearchFilter == 'Box' ){
+                    testFields.push(Box);
+
+                }else if (selectedSearchFilter == 'Shelf' ){
+                    testFields.push(Shelf);
+
+                }else if (selectedSearchFilter == 'Serial Number' ){
+                    testFields.push(SN);
+
+                }else if (selectedSearchFilter == 'Component Name' ){
+                    testFields.push(ComponentName);
+
+                }else if (selectedSearchFilter == 'Part Number' ){
+                    testFields.push(PartNumber);
+
+                }else if (selectedSearchFilter == 'Quick Reference' ){
+                    testFields.push(QuickReference);
+
+                }else if (selectedSearchFilter == 'Shelf Comment' ){
+                    testFields.push(ShelfComment);
+                }
+
+
 
                 for (let fieldsIndex = 0; fieldsIndex < testFields.length; ++fieldsIndex) {
                     var field = testFields[fieldsIndex];
@@ -203,9 +247,9 @@ var SimpleListModel = function (boatSections, inventoryByBoatSection) {
 
     }, this);
 
+
     var storedSearchTerm = localStorage.getItem("searchTerm");
     this.searchTerm(storedSearchTerm);
-
 
 
     this.selectedBoatSection = ko.observable('ALL SECTIONS');

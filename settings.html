@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="System to manage inventory items.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Inventory</title>
+    <title>Inventory Settings</title>
 
     <!-- Add to homescreen Android -->
     <!-- <meta name="mobile-web-app-capable" content="yes">
@@ -14,7 +14,7 @@
     <!-- Add to homescreen iOS -->
     <!-- <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="Manage Inventory">
+    <meta name="apple-mobile-web-app-title" content="Inventory Settings">
     <link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png"> -->
     
     <!-- Styling links-->
@@ -53,11 +53,17 @@
   </head>
 
   <body onload="onLoad()">
+    <!-- <div id="mySidenav" class="sidebar">
+      <a class="active" href="#home">Home</a>
+      <a href="#manage">Manage Items</a>
+      <a href="#settings">Settings</a>
+    </div> -->
+
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
       <!-- Search Header bar -->
       <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
         <div class="mdl-layout__header-row">
-          <span class="mdl-layout-title">Manage Inventory</span>
+          <span class="mdl-layout-title">Settings</span>
         </div>
       </header>
       <!-- Side navigation bar -->
@@ -71,22 +77,8 @@
       <!-- Main content -->
       <main class="mdl-layout__content mdl-color--grey-100">
         <div class="mdl-grid demo-content">
-          <h3>[BOAT_SECTION]</h3>
-          <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid" data-bind="foreach: items">
-            <div class="demo-card-square mdl-card mdl-shadow--2dp" data-bind="visible: matchesFilter">
-              <div class="mdl-card__title mdl-card--expand">
-                <h2 class="mdl-card__title-text" data-bind="text:ComponentName">[ComponentName]</h2>
-              </div>
-              <div class="mdl-card__supporting-text">
-                [ITEM_DESCRIPTION]
-              </div>
-              <div class="mdl-card__actions mdl-card--border">
-                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" data-bind="click: $root.onInventoryRowClick">
-                  View Item
-                </a>
-              </div>
-            </div>
-          </div>
+          <h3>FAQ</h3>
+        </div>
       </main>
   </body>
 </html>

@@ -1,63 +1,116 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="style.css" />
-  <script type='text/javascript' src='./js/knockout-3.5.1.js'></script>
-  <script type='text/javascript' src='./js/item-detail.js'></script>
-</head>
-<body onload="onLoad()">
-  <div id="mySidenav" class="sidebar">
-    <a class="active" href="index.html">< Back</a>
-  </div>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="System to manage inventory items.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Details</title>
 
-  <div id="content" class="content">
-    <div class="edit-item-container">
-      <button onclick="document.getElementById('edit').style.display='block'" style="width:auto;">Edit Item</button>
+    <!-- Add to homescreen Android -->
+    <!-- <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="images/android-desktop.png"> -->
+
+    <!-- Add to homescreen iOS -->
+    <!-- <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Item Details">
+    <link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png"> -->
+    
+    <!-- Styling links-->
+    <link rel="stylesheet" href="./css/material.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!-- Javascript links-->
+    <script type='text/javascript' src='./js/knockout-3.5.1.js'></script>
+    <script type='text/javascript' src='./js/item-detail.js'></script>
+    <script type='text/javascript' src="./js/material.min.js"></script>
+
+    <style>
+      #view-source {
+        position: fixed;
+        display: block;
+        right: 0;
+        bottom: 0;
+        margin-right: 40px;
+        margin-bottom: 40px;
+        z-index: 900;
+      }
+      </style>
+
+      <!-- Image card -->
+<style>
+  .demo-card-image.mdl-card {
+    width: 256px;
+    height: 256px;
+    background: url('../assets/demos/image_card.jpg') center / cover;
+  }
+  .demo-card-image > .mdl-card__actions {
+    height: 52px;
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.2);
+  }
+  .demo-card-image__filename {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  </style>
+  </head>
+
+<body onload="onLoad()">
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+    <!-- Search Header bar -->
+    <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
+      <div class="mdl-layout__header-row">
+        <span class="mdl-layout-title">Item Details</span>
+        <div class="mdl-layout-spacer"></div>
+        <button class="mdl-button mdl-js-button mdl-button--primary" type="submit">Save Changes</button>
+        <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
+          <i class="material-icons">more_vert</i>
+        </button>
+        <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
+          <li class="mdl-menu__item">Edit Item</li>
+          <li class="mdl-menu__item">Delete Item</li>
+        </ul>
+      </div>
+    </header>
+    <!-- Side navigation bar -->
+    <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-800 mdl-color-text--blue-grey-50">
+      <nav class="demo-navigation mdl-navigation">
+        <a class="mdl-navigation__link mdl-color-text--grey-500" href="index.html"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">arrow_back</i><b>Back</b></a>
+      </nav>
     </div>
-    <div id="details">
-      <h1>ComponentName (string)</h1>
-      <h3>Availability (bool)</h3>
-      <h3>BoatSection (string)</h3>
-      <h3>Shelf (double)</h3>
-      <h3>Box (double)</h3>
-      <h3>SerialNumber (double)</h3>
-      <h3>PurchasePrice (string)</h3>
-      <h3>AproxPriceValue (string)</h3>
-      <h3>Quantity (double)</h3>
-      <h3>OriginalQty (double)</h3>
-      <h3>FunctionOrUse (string)</h3>
-      <h3>ShelfComment (string)</h3>
-      <h3>QuickReference (string)</h3>
-      <h3>PartNumber (string)</h3>
-      <h3>Spacer (string)</h3>
-      <h3>Photos1 (string)</h3>
-      <h3>Photos2 (string)</h3>
-      <h3>SN (double)</h3>
-  
-    </div>
-    <div id="edit">
-      <input type="text"  data-bind="value: inventoryItem.ComponentName" placeholder="Component name.." name="ComponentName">
-      <input type="text"  data-bind="value: inventoryItem.Availability" placeholder="Availability.." name="Availability">
-      <input type="text"  data-bind="value: inventoryItem.BoatSection" placeholder="Boat section.." name="BoatSection">
-      <input type="text" placeholder="Shelf.." name="Shelf">
-      <input type="text" placeholder="Box.." name="Box">
-      <input type="text" placeholder="Serial number.." name="SerialNumber">
-      <input type="text" placeholder="Purchase price.." name="PurchasePrice">
-      <input type="text" placeholder="Aprox price value.." name="AproxPriceValue">
-      <input type="text" placeholder="Quantity.." name="Quantity">
-      <input type="text" placeholder="Original qty.." name="OriginalQty">
-      <input type="text" placeholder="Function or use.." name="FunctionOrUse">
-      <input type="text" placeholder="Shelf comment.." name="ShelfComment">
-      <input type="text" placeholder="Quick reference.." name="QuickReference">
-      <input type="text" placeholder="Part number.." name="PartNumber">
-      <input type="text" placeholder="Space.." name="Spacer">
-      <input type="text" placeholder="Photos 1.." name="Photos1">
-      <input type="text" placeholder="Photos 2.." name="Photos2">
-      <input type="text" placeholder="SN.." name="SN">
-      
-      <button type="submit" data-bind='click: save'>Save Changes</button> 
-    </div>
+    <!-- Main content -->
+    <main class="mdl-layout__content mdl-color--grey-100">
+      <div class="demo-content">
+        <div class="mdl-grid">
+          <div class="demo-card-image mdl-card mdl-shadow--2dp" style="margin-right: 20px;">
+            <div class="mdl-card__title mdl-card--expand"></div>
+          </div>
+          <div class="demo-card-image mdl-card mdl-shadow--2dp">
+            <div class="mdl-card__title mdl-card--expand"></div>
+          </div>
+        </div>
+        <h3>ComponentName (string)</h3>
+        <h4>Availability (bool)</h4>
+        <h4>BoatSection (string)</h4>
+        <h4>Shelf (double)</h4>
+        <h4>Box (double)</h4>
+        <h4>SerialNumber (double)</h4>
+        <h4>PurchasePrice (string)</h4>
+        <h4>AproxPriceValue (string)</h4>
+        <h4>Quantity (double)</h4>
+        <h4>OriginalQty (double)</h4>
+        <h4>FunctionOrUse (string)</h4>
+        <h4>ShelfComment (string)</h4>
+        <h4>QuickReference (string)</h34>
+        <h4>PartNumber (string)</h4>
+        <h4>Spacer (string)</h4>
+        <h4>Photos1 (string)</h4>
+        <h4>Photos2 (string)</h4>
+        <h4>SN (double)</h4>
+    </main>
   </div>
 </body>
 </html>

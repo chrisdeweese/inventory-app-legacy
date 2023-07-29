@@ -217,7 +217,7 @@ var SimpleListModel = function (boatSections, inventoryByBoatSection) {
     }, this);
 
 
-    self.filterdGroups = ko.computed(function () {
+    self.filteredGroups = ko.computed(function () {
 
         return ko.utils.arrayFilter(self.inventoryItems(), function (item) {
 

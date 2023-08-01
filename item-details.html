@@ -55,6 +55,25 @@
     font-size: 14px;
     font-weight: 500;
   }
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+  }
+  .grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 10px;
+  }
+  .grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+    height: 200px;
+    vertical-align: middle;
+  }
   </style>
   </head>
 
@@ -86,30 +105,40 @@
       <div class="demo-content">
         <div class="mdl-grid">
           <div class="demo-card-image mdl-card mdl-shadow--2dp" style="margin-right: 20px;">
-            <div class="mdl-card__title mdl-card--expand"></div>
+            <img data-bind="attr : {src: inventoryItem.Photos1}"/>
           </div>
           <div class="demo-card-image mdl-card mdl-shadow--2dp">
-            <div class="mdl-card__title mdl-card--expand"></div>
+            <img data-bind="attr : {src: inventoryItem.Photos2}"/>
           </div>
         </div>
-        <h3>ComponentName (string)</h3>
-        <h4>Availability (bool)</h4>
-        <h4>BoatSection (string)</h4>
-        <h4>Shelf (double)</h4>
-        <h4>Box (double)</h4>
-        <h4>SerialNumber (double)</h4>
-        <h4>PurchasePrice (string)</h4>
-        <h4>AproxPriceValue (string)</h4>
-        <h4>Quantity (double)</h4>
-        <h4>OriginalQty (double)</h4>
-        <h4>FunctionOrUse (string)</h4>
-        <h4>ShelfComment (string)</h4>
-        <h4>QuickReference (string)</h34>
-        <h4>PartNumber (string)</h4>
-        <h4>Spacer (string)</h4>
-        <h4>Photos1 (string)</h4>
-        <h4>Photos2 (string)</h4>
-        <h4>SN (double)</h4>
+        <h3 data-bind="text: 'Name: ' + inventoryItem.ComponentName()">ComponentName</h3>
+        <div class="grid-container">
+          <div class="grid-item">Available: Yes</div>
+          <div class="grid-item">Section: Coff-Elec</div>
+          <div class="grid-item">Shelf: 303</div>  
+          <div class="grid-item">4</div>
+          <div class="grid-item">5</div>
+          <div class="grid-item">6</div>  
+          <div class="grid-item">7</div>
+          <div class="grid-item">8</div>
+          <div class="grid-item">9</div>  
+          <div class="grid-item">10</div>  
+        </div>
+        <h4 data-bind="text: 'Available: ' + inventoryItem.Availability()">Availability</h4>
+        <h4 data-bind="text: 'Boat Section: ' + inventoryItem.BoatSection()">BoatSection</h4>
+        <h4 data-bind="text: 'Shelf: ' + inventoryItem.Shelf()">Shelf</h4>
+        <h4 data-bind="text: 'Box: ' + inventoryItem.Box()">Box</h4>
+        <h4 data-bind="text: 'Serial Number: ' + inventoryItem.SerialNumber()">SerialNumber</h4>
+        <h4 data-bind="text: 'Purchase Price: ' + inventoryItem.PurchasePrice()">PurchasePrice</h4>
+        <h4 data-bind="text: 'Aprox Price Value: ' + inventoryItem.AproxPriceValue()">AproxPriceValue</h4>
+        <h4 data-bind="text: 'Quantity: ' + inventoryItem.Quantity()">Quantity</h4>
+        <h4 data-bind="text: 'Original Qty: ' + inventoryItem.OriginalQty()">OriginalQty</h4>
+        <h4 data-bind="text: 'Function Or Use: ' + inventoryItem.FunctionOrUse()">FunctionOrUse</h4>
+        <h4 data-bind="text: 'Shelf Comment: ' + inventoryItem.ShelfComment()">ShelfComment</h4>
+        <h4 data-bind="text: 'Quick Reference: ' + inventoryItem.QuickReference()">QuickReference</h4>
+        <h4 data-bind="text: 'Part Number: ' + inventoryItem.PartNumber()">PartNumber</h4>
+        <!-- <h4 data-bind="text: 'Spacer: ' + inventoryItem.Spacer()">Spacer</h4> -->
+        <h4 data-bind="text: 'SN: ' + inventoryItem.SN()">SN</h4>
     </main>
   </div>
 </body>

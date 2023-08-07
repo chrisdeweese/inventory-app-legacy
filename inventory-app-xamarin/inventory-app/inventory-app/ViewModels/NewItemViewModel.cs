@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Input;
 using inventory_app.Models;
 using Xamarin.Forms;
 
@@ -49,14 +46,15 @@ namespace inventory_app.ViewModels
 
         private async void OnSave()
         {
-            Item newItem = new Item()
+            InventoryItem newItem = new InventoryItem()
             {
-                Id = Guid.NewGuid().ToString(),
-                Text = Text,
-                Description = Description
+                //TODO: UPDATE THIS
+                RecordID = Guid.NewGuid().ToString(),
+                ComponentName = Text,
+                ShelfComment = Description
             };
             
-            await DataStore.AddItemAsync(newItem);
+            await InventoryService.AddItemAsync(newItem);
 
             // This will pop the current page off the navigation stack
             await Shell.Current.GoToAsync("..");

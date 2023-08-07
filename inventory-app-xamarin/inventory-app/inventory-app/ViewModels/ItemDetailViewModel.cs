@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Threading.Tasks;
-using inventory_app.Models;
 using Xamarin.Forms;
 
 namespace inventory_app.ViewModels
@@ -43,10 +41,11 @@ namespace inventory_app.ViewModels
         {
             try
             {
-                var item = await DataStore.GetItemAsync(itemId);
-                Id = item.Id;
-                Text = item.Text;
-                Description = item.Description;
+                //TODO: UPDATE THIS
+                var item = await InventoryService.GetItemAsync(itemId);
+                Id = item.RecordID;
+                Text = item.ComponentName;
+                Description = item.Shelf.ToString();
             }
             catch (Exception)
             {

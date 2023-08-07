@@ -1,8 +1,4 @@
-﻿using inventory_app.Views;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace inventory_app.ViewModels
 {

@@ -2,9 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
-
 using inventory_app.Models;
 using inventory_app.Views;
 
@@ -12,20 +10,20 @@ namespace inventory_app.ViewModels
 {
     public class HomeViewModel : BaseViewModel
     {
-        private Item _selectedItem;
+        private InventoryItem _selectedItem;
 
-        public ObservableCollection<Item> Items { get; }
+        public ObservableCollection<InventoryItem> Items { get; }
         public Command LoadItemsCommand { get; }
         public Command AddItemCommand { get;  }
-        public Command<Item> ItemTapped { get; }
+        public Command<InventoryItem> ItemTapped { get; }
 
         public HomeViewModel()
         {
             Title = "Home";
-            Items = new ObservableCollection<Item>();
+            Items = new ObservableCollection<InventoryItem>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
-            ItemTapped = new Command<Item>(OnItemSelected);
+            ItemTapped = new Command<InventoryItem>(OnItemSelected);
 
             AddItemCommand = new Command(OnAddItem);
         }
@@ -37,7 +35,7 @@ namespace inventory_app.ViewModels
             try
             {
                 Items.Clear();
-                var items = await DataStore.GetItemsAsync(true);
+                var items = await InventoryService.GetItemsAsync(true);
                 foreach (var item in items)
                 {
                     Items.Add(item);
@@ -59,7 +57,7 @@ namespace inventory_app.ViewModels
             SelectedItem = null;
         }
 
-        public Item SelectedItem
+        public InventoryItem SelectedItem
         {
             get => _selectedItem;
             set
@@ -74,13 +72,13 @@ namespace inventory_app.ViewModels
             await Shell.Current.GoToAsync(nameof(NewItemPage));
         }
 
-        async void OnItemSelected(Item item)
+        async void OnItemSelected(InventoryItem item)
         {
             if (item == null)
                 return;
 
             // This will push the ItemDetailPage onto the navigation stack
-            await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={item.Id}");
+            await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={item.RecordID}");
         }
     }
 }

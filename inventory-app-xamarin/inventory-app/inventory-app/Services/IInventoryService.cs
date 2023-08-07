@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace inventory_app.Services
 {
-    public interface IDataStore<T>
+    public interface IInventoryService<T>
     {
         Task<bool> AddItemAsync(T item);
         Task<bool> UpdateItemAsync(T item);

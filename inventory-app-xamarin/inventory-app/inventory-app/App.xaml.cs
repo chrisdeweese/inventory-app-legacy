@@ -13,7 +13,7 @@ namespace inventory_app
         {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
+            DependencyService.Register<InventoryService>();
             MainPage = new AppShell();
         }
 
